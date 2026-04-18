@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Lab4_ProductosB73668.Models.Producto>
+
+@{
+    ViewData["Title"] = "Directorio de Productos";
+}
+
+<h1>Directorio de Productos</h1>
+
+<p>
+    <a asp-action="Crear" class="btn btn-primary">Nuevo Producto</a>
+</p>
+
+@if (!Model.Any())
+{
+    <p>No hay productos registrados.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Categoría</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var producto in Model)
+            {
+                <tr>
+                    <td>@producto.Id</td>
+                    <td>@producto.Nombre</td>
+                    <td>@producto.Precio.ToString("C2")</td>
+                    <td>@producto.Categoria</td>
+                    <td>
+                        <a asp-action="Detalles" asp-route-id="@producto.Id">Detalles</a> |
+                        <a asp-action="Editar" asp-route-id="@producto.Id">Editar</a> |
+                        <a asp-action="Eliminar" asp-route-id="@producto.Id">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
